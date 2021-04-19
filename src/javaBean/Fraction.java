@@ -19,8 +19,10 @@ public class Fraction {
 
     //分数带参构造器
     public Fraction(int numerator, int denominator) {
-        this.numerator = numerator;
-        this.denominator = denominator;
+        //求得最小公倍数gcd，并利用gcd将分数化为最简
+        int gcd = LeastCommonMultiple(numerator,denominator);
+        this.numerator = numerator/gcd;
+        this.denominator = denominator/gcd;
     }
 
     public int getNumerator() {
@@ -56,5 +58,17 @@ public class Fraction {
        if(numerator%denominator==0) return ""+numerator/denominator;
        else
            return numerator/denominator + "‘" + (numerator%denominator) + "/" +denominator;
+    }
+
+    /**
+     * 辗转相除法求最大公约数
+     * @param num1 正整数
+     * @param num2 正整数
+     * @return 返回最大公约数
+     */
+    private int LeastCommonMultiple(int num1, int num2){
+        if(num2 == 0)
+            return num1;
+        return LeastCommonMultiple(num2, num1 % num2);
     }
 }
