@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Generator {
-    private final static String[] Operator = {"+","-","×","÷"};
     static int flagNum = -1; //-1代表可添加"("，0代表可添加")"，1代表不可添加
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     private Generator(){ }
 
@@ -128,7 +127,7 @@ public class Generator {
         if(flag) operatorList.add(")");
     }
 
-    //List转字符串
+    //表达式List转字符串
     public static String ListToString(List<Object> exp){
         StringBuilder sb = new StringBuilder();
         for (Object o : exp) {
