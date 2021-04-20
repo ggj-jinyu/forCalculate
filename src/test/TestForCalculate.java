@@ -2,6 +2,9 @@ package test;
 
 import javaBean.Fraction;
 import org.junit.Test;
+import utils.Generator;
+
+import java.util.List;
 
 /**
  * 1.assertTrue/False ([String message,]boolean condition);
@@ -44,5 +47,15 @@ public class TestForCalculate {
 
         Fraction fraction3 = new Fraction(2,4);
         assert fraction3.toString().equals("1/2");
+    }
+
+    @Test
+    public void TestGenerator(){
+        int i = 0;
+        while (i<10){
+            List<Object> exp = Generator.generator(9);
+            System.out.println(Generator.ListToString(exp));
+            ++i;
+        }
     }
 }
