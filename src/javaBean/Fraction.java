@@ -4,8 +4,8 @@ package javaBean;
  * 分数类
  */
 public class Fraction {
-    int numerator; //分子
-    int denominator; //分母
+    private int numerator; //分子
+    private int denominator; //分母
 
     //无参构造器
     public Fraction() {
@@ -57,7 +57,7 @@ public class Fraction {
        if(numerator<denominator) return numerator + "/" +denominator;
        if(numerator%denominator==0) return ""+numerator/denominator;
        else
-           return numerator/denominator + "‘" + (numerator%denominator) + "/" +denominator;
+           return numerator/denominator + "'" + (numerator%denominator) + "/" +denominator;
     }
 
     /**
