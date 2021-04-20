@@ -44,24 +44,24 @@ public class Generator {
 */
 
     public static List<Object> generator(int range){
-        List<String> exp = new ArrayList<>();
-        int nums = generatorOperator(exp);
+        List<String> operatorList = new ArrayList<>();
+        int nums = generatorOperator(operatorList);
         List<Fraction> numList = generatorNum(nums, range);
         List<Object> list = new ArrayList<>();
         int numIndex = 0;
         int i = 0;
-        if(exp.get(0).equals("(")) {
-            list.add(exp.get(0));
+        if(operatorList.get(0).equals("(")) {
+            list.add(operatorList.get(0));
             ++i;
         }
         list.add(numList.get(0)); ++numIndex;
-        for (; i<exp.size(); i++) {
-            String str = exp.get(i);
+        for (; i<operatorList.size(); i++) {
+            String str = operatorList.get(i);
             //[2, -, 6, (, +, 1‘1/6, )]
             if(str.equals("+") || str.equals("-") || str.equals("×") || str.equals("÷")){
                 list.add(str);
-                if( (i+1)<exp.size() && "(".equals(exp.get(i+1)) ){
-                    list.add(exp.get(i+1)); ++i;
+                if( (i+1)<operatorList.size() && "(".equals(operatorList.get(i+1)) ){
+                    list.add(operatorList.get(i+1)); ++i;
                 }
                 list.add(numList.get(numIndex)); ++numIndex;
             }else list.add(str);
@@ -81,57 +81,57 @@ public class Generator {
     }
 
     //生成算术操作符
-    private static int generatorOperator(List<String> exp) {
+    private static int generatorOperator(List<String> operatorList) {
         int i = random.nextInt(3)+1; //操作符个数：[1,4)
         //数值的个数 = 操作数 + 1;
         int nums = i + 1;
         while (i>0){
             switch (random.nextInt(5)) {
                 case 0:
-                    if (flagNum == -1) { exp.add("("); ++flagNum; }
+                    if (flagNum == -1) { operatorList.add("("); ++flagNum; }
                     break;
                 case 1:
-                    exp.add("+"); --i; replenish(exp);
+                    operatorList.add("+"); --i; replenish(operatorList);
                     break;
                 case 2:
-                    exp.add("-"); --i; replenish(exp);
+                    operatorList.add("-"); --i; replenish(operatorList);
                     break;
                 case 3:
-                    exp.add("×"); --i; replenish(exp);
+                    operatorList.add("×"); --i; replenish(operatorList);
                     break;
                 case 4:
-                    exp.add("÷"); --i; replenish(exp);
+                    operatorList.add("÷"); --i; replenish(operatorList);
                     break;
             }
         }
-        replenishBracket(exp);//判断"("是否被匹配，否则补充")"
+        replenishBracket(operatorList);//判断"("是否被匹配，否则补充")"
         flagNum = -1; //重置flagNum,以便下次也可以生成括号
         //返回数值的个数
         return nums;
     }
 
     //50%的概率加入")"
-    private static void replenish(List<String> exp){
+    private static void replenish(List<String> operatorList){
         if (random.nextInt(2) == 0 && flagNum == 0) {
-            exp.add(")");
+            operatorList.add(")");
             ++flagNum;
         }
     }
 
     //若存在"("未被匹配，则在末尾加个")"
-    private static void replenishBracket(List<String> exp) {
+    private static void replenishBracket(List<String> operatorList) {
         boolean flag = false; //false:无"("或匹配成功
-        for (String str : exp) {
+        for (String str : operatorList) {
             if(str.equals("(")) flag = !flag;
             if(str.equals(")")) flag = !flag;
         }
-        if(flag) exp.add(")");
+        if(flag) operatorList.add(")");
     }
 
     //List转字符串
-    public static String ListToString(List<Object> list){
+    public static String ListToString(List<Object> exp){
         StringBuilder sb = new StringBuilder();
-        for (Object o : list) {
+        for (Object o : exp) {
             if(o instanceof String){
                 sb.append(o).append(" ");
             }else sb.append(o.toString()).append(" ");
