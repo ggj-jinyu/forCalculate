@@ -5,9 +5,7 @@ import org.junit.Test;
 import utils.Generator;
 import utils.ListToBinaryTree;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * 1.assertTrue/False ([String message,]boolean condition);
@@ -50,6 +48,8 @@ public class TestForCalculate {
 
         Fraction fraction3 = new Fraction(2,4);
         assert fraction3.toString().equals("1/2");
+
+        assert fraction1.max(fraction3);
     }
 
     /**
