@@ -71,4 +71,16 @@ public class Fraction {
             return num1;
         return LeastCommonMultiple(num2, num1 % num2);
     }
+
+    /**
+     * 比较 this 和 f 的大小
+     * @param f 被比较的Fraction
+     * @return  this>f:true
+     */
+    public boolean max(Fraction f){
+        int totalDenominator = this.denominator * f.denominator;
+        int thisNumerator = this.numerator * f.denominator;
+        int fNumerator = f.numerator * this.denominator;
+        return thisNumerator > fNumerator;
+    }
 }
