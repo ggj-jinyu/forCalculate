@@ -46,4 +46,10 @@ public class BinaryTreeNode {
     public void setRightChild(BinaryTreeNode rightChild) {
         this.rightChild = rightChild;
     }
+
+    public boolean max(BinaryTreeNode node){
+        if(this.data instanceof Fraction && node.getData() instanceof Fraction){
+            return ((Fraction) this.data).max((Fraction) node.getData());
+        }else return false;
+    }
 }
