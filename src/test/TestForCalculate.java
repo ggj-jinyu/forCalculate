@@ -3,8 +3,11 @@ package test;
 import javaBean.Fraction;
 import org.junit.Test;
 import utils.Generator;
+import utils.ListToBinaryTree;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 1.assertTrue/False ([String message,]boolean condition);
@@ -49,6 +52,9 @@ public class TestForCalculate {
         assert fraction3.toString().equals("1/2");
     }
 
+    /**
+     * 测试算术表达式生成器
+     */
     @Test
     public void TestGenerator(){
         int i = 0;
@@ -58,4 +64,22 @@ public class TestForCalculate {
             ++i;
         }
     }
+
+    /**
+     * 测试 算术表达式 中序转后序
+     */
+    @Test
+    public void TestListToBinaryTree(){
+        int i = 0;
+        while (i<15){
+            List<Object> exp = Generator.generator(9);
+            System.out.println(Generator.ListToString(exp));
+            List<Object> list = ListToBinaryTree.toPost(exp);
+            System.out.println(Generator.ListToString(list));
+            System.out.println();
+            ++i;
+        }
+    }
+
+
 }
