@@ -115,7 +115,7 @@ public class BinaryTreeUtils {
     }
 
     //比较二叉树是否相等
-    public boolean isSameTree(BinaryTreeNode p,BinaryTreeNode q) {
+    public static boolean isSameTree(BinaryTreeNode p,BinaryTreeNode q) {
         //两棵二叉树均为null
         if (p == null && q == null) {
             return true;
