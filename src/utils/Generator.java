@@ -56,7 +56,6 @@ public class Generator {
         list.add(numList.get(0)); ++numIndex;
         for (; i<operatorList.size(); i++) {
             String str = operatorList.get(i);
-            //[2, -, 6, (, +, 1‘1/6, )]
             if(str.equals("+") || str.equals("-") || str.equals("×") || str.equals("÷")){
                 list.add(str);
                 if( (i+1)<operatorList.size() && "(".equals(operatorList.get(i+1)) ){
