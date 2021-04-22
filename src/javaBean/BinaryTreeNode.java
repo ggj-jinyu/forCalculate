@@ -47,9 +47,20 @@ public class BinaryTreeNode {
         this.rightChild = rightChild;
     }
 
+    /**
+     * 比较大小的方法
+     * @param node 被比较的节点
+     * @return this>node: true
+     */
     public boolean max(BinaryTreeNode node){
         if(this.data instanceof Fraction && node.getData() instanceof Fraction){
             return ((Fraction) this.data).max((Fraction) node.getData());
         }else return false;
+    }
+
+    @Override
+    public String toString() {
+        if(data instanceof String) return (String) data;
+        return data.toString();
     }
 }
