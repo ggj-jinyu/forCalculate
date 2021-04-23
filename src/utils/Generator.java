@@ -42,6 +42,7 @@ public class Generator {
     }
 */
 
+    //带括号的生成器
     public static List<Object> generator(int range){
         List<String> operatorList = new ArrayList<>();
         int nums = generatorOperator(operatorList);
