@@ -1,5 +1,7 @@
 package javaBean;
 
+import java.util.Objects;
+
 public class BinaryTreeNode {
     private Object data;  //数据
     private BinaryTreeNode leftChild;  //左孩子
@@ -62,5 +64,25 @@ public class BinaryTreeNode {
     public String toString() {
         if(data instanceof String) return (String) data;
         return data.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BinaryTreeNode node = (BinaryTreeNode) o;
+
+        if (!Objects.equals(data, node.data)) return false;
+        if (!Objects.equals(leftChild, node.leftChild)) return false;
+        return Objects.equals(rightChild, node.rightChild);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = data != null ? data.hashCode() : 0;
+        result = 31 * result + (leftChild != null ? leftChild.hashCode() : 0);
+        result = 31 * result + (rightChild != null ? rightChild.hashCode() : 0);
+        return result;
     }
 }

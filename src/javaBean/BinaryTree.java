@@ -44,5 +44,20 @@ public class BinaryTree {
     public BinaryTreeNode getParent(BinaryTreeNode node){
         return (this.root==null||this.root==node)? null:BinaryTreeUtils.getParent(this.root,node);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BinaryTree that = (BinaryTree) o;
+
+        return root != null ? BinaryTreeUtils.isSameTree(root,that.getRoot()) : that.root == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return root != null ? root.hashCode() : 0;
+    }
 }
 
