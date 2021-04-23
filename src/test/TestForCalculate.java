@@ -1,11 +1,16 @@
 package test;
 
+import javaBean.BinaryTree;
 import javaBean.Fraction;
 import org.junit.Test;
+import utils.BinaryTreeUtils;
 import utils.Generator;
 import utils.ListToBinaryTree;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 1.assertTrue/False ([String message,]boolean condition);
@@ -81,5 +86,55 @@ public class TestForCalculate {
         }
     }
 
+    /**
+     * 测试二叉树BinaryTree的生成
+     */
+    @Test
+    public void TestBinaryTree(){
+        int i = 0;
+        while (i<15) {
+            List<Object> exp = Generator.generator(9);
+            System.out.println(Generator.ListToString(exp));
+            List<Object> list = ListToBinaryTree.toPost(exp);
+            System.out.println(Generator.ListToString(list));
+            BinaryTree binaryTree = ListToBinaryTree.postExpToBinaryTree(list);
+            BinaryTreeUtils.postOrder(binaryTree.getRoot());
+            System.out.println("-----");
+            ++i;
+        }
+    }
 
+    /**
+     * 测试查重
+     */
+    @Test
+    public void TestIsSameTree(){
+        Fraction f = new Fraction(3,4);
+        Fraction f2 = new Fraction(3,5);
+        Fraction f3 = new Fraction(2,3);
+        List<Object> exp1 = new ArrayList<>();
+        List<Object> exp2 = new ArrayList<>();
+        exp1.add(f); exp2.add(f);
+        exp1.add("+"); exp2.add("+");
+        exp1.add(f2); exp2.add(f3);
+        exp1.add("×"); exp2.add("×");
+        exp1.add(f3); exp2.add(f2);
+        BinaryTree binaryTree1 = ListToBinaryTree.createBinaryTree(exp1);
+        BinaryTree binaryTree2 = ListToBinaryTree.createBinaryTree(exp2);
+        //断言： 相同题目 3/4+3/5*2/3 和 3/4+2/3*3/5 生成的二叉树相等
+        assert BinaryTreeUtils.isSameTree(binaryTree1.getRoot(), binaryTree2.getRoot());
+
+        Set<BinaryTree> binaryTreeSet = new LinkedHashSet<>();
+        binaryTreeSet.add(binaryTree1);
+        int i = 0;
+        while (i<15) {
+            List<Object> exp = Generator.generator(9);
+            BinaryTree binaryTree = ListToBinaryTree.createBinaryTree(exp);
+            binaryTreeSet.add(binaryTree);
+            if(i==6) binaryTreeSet.add(binaryTree2);
+            ++i;
+        }
+        //断言：binaryTree1加入set后，add(binaryTree2)时会自动去重，仅保留一个，故set的数量应为16
+        assert binaryTreeSet.size() == 16;
+    }
 }
