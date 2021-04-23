@@ -12,15 +12,24 @@ public class ListToBinaryTree {
     private ListToBinaryTree() { }
 
     //生成二叉树
-    public static BinaryTree toBinaryTree(List<Object> exp){
+    public static BinaryTree createBinaryTree(List<Object> exp){
+        List<Object> reversePolish = toPost(exp);
+        return postExpToBinaryTree(reversePolish);
+    }
+
+    //逆波兰表达式转二叉树
+    public static BinaryTree postExpToBinaryTree(List<Object> reversePolish){
         Stack<BinaryTreeNode> fractionStack = new Stack<>();
-        for (Object o : exp) {
+        for (Object o : reversePolish) {
             BinaryTreeNode node = new BinaryTreeNode(o);
             //操作数直接入栈
             //操作符则弹出两个node设置左右子树
             if(o instanceof String){
                 BinaryTreeNode node1 = fractionStack.pop();
                 BinaryTreeNode node2 = fractionStack.pop();
+                //之所以要比较大小，是因为想设定 每个节点的左子树必定小于或等于右子树
+                //那么在这个设定下，重复题目生成的二叉树是一摸一样的树。如3+(2+1)和1+2+3，所生成的二叉树是一样
+                //如此查重就变成了比较两颗二叉树是否相等
                 if(node2.max(node1)){
                     node.setLeftChild(node1);
                     node.setRightChild(node2);
