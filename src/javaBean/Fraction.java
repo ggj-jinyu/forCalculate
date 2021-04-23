@@ -78,7 +78,6 @@ public class Fraction {
      * @return  this>f:true
      */
     public boolean max(Fraction f){
-        int totalDenominator = this.denominator * f.denominator;
         int thisNumerator = this.numerator * f.denominator;
         int fNumerator = f.numerator * this.denominator;
         return thisNumerator > fNumerator;
