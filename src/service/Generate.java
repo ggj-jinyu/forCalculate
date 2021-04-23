@@ -40,7 +40,7 @@ public class Generate {
                 ++expSize;
                 //把数据加入集合
                 expList.add(expSize+". "+Generator.ListToString(exp));
-                answerList.add(expSize+". "+Generator.ListToString(exp)+result.toString());
+                answerList.add(expSize+". "+Generator.ListToString(exp)+" "+result.toString());
             }
         }
 
