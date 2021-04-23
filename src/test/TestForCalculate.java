@@ -3,6 +3,7 @@ package test;
 import javaBean.BinaryTree;
 import javaBean.Fraction;
 import org.junit.Test;
+import service.Generate;
 import utils.BinaryTreeUtils;
 import utils.Generator;
 import utils.ListToBinaryTree;
@@ -136,5 +137,14 @@ public class TestForCalculate {
         }
         //断言：binaryTree1加入set后，add(binaryTree2)时会自动去重，仅保留一个，故set的数量应为16
         assert binaryTreeSet.size() == 16;
+    }
+
+    /**
+     * 测试service里的Generate功能
+     */
+    @Test
+    public void TestGenerate(){
+        Generate generateService = new Generate();
+        generateService.generateExp(100,10);
     }
 }
