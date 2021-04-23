@@ -28,7 +28,7 @@ public class BinaryTreeUtils {
      * 获取二叉树的高度，只需要调用第一种方法，即传入根节点
      */
     //获取以某节点为子树的高度
-    public static  int height(BinaryTreeNode node){
+    public static int height(BinaryTreeNode node){
         if(node==null){
             return 0; //递归结束，空子树高度为0
         }else{
