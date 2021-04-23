@@ -5,8 +5,8 @@ import javaBean.Fraction;
 import java.util.List;
 import java.util.Stack;
 
-public class calculate {
-    private calculate() { }
+public class Calculate {
+    private Calculate() { }
 
     /**
      * 计算逆波兰式，返回一个Fraction
