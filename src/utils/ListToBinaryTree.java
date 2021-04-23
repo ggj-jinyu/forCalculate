@@ -14,11 +14,11 @@ public class ListToBinaryTree {
     //生成二叉树
     public static BinaryTree createBinaryTree(List<Object> exp){
         List<Object> reversePolish = toPost(exp);
-        return postExpToBinaryTree(reversePolish);
+        return expRPNToBinaryTree(reversePolish);
     }
 
     //逆波兰表达式转二叉树
-    public static BinaryTree postExpToBinaryTree(List<Object> reversePolish){
+    public static BinaryTree expRPNToBinaryTree(List<Object> reversePolish){
         Stack<BinaryTreeNode> fractionStack = new Stack<>();
         for (Object o : reversePolish) {
             BinaryTreeNode node = new BinaryTreeNode(o);

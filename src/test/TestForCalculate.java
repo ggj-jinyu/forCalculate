@@ -97,7 +97,7 @@ public class TestForCalculate {
             System.out.println(Generator.ListToString(exp));
             List<Object> list = ListToBinaryTree.toPost(exp);
             System.out.println(Generator.ListToString(list));
-            BinaryTree binaryTree = ListToBinaryTree.postExpToBinaryTree(list);
+            BinaryTree binaryTree = ListToBinaryTree.expRPNToBinaryTree(list);
             BinaryTreeUtils.postOrder(binaryTree.getRoot());
             System.out.println("-----");
             ++i;
