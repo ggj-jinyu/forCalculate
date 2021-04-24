@@ -3,11 +3,13 @@ package test;
 import javaBean.BinaryTree;
 import javaBean.Fraction;
 import org.junit.Test;
+import service.CheckAnswer;
 import service.Generate;
 import utils.BinaryTreeUtils;
 import utils.Generator;
 import utils.ListToBinaryTree;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -146,5 +148,14 @@ public class TestForCalculate {
     public void TestGenerate(){
         Generate generateService = new Generate();
         generateService.generateExp(100,10);
+    }
+
+    /**
+     * 测试检测答案checkAnswer功能
+     */
+    @Test
+    public void TestCheckAnswer(){
+        CheckAnswer check = new CheckAnswer();
+        check.checkAnswer(new File("exerciseAnswer.txt"), new File("Answer.txt"));
     }
 }
