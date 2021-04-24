@@ -2,14 +2,18 @@ package test;
 
 import javaBean.BinaryTree;
 import javaBean.Fraction;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import service.CheckAnswer;
 import service.Generate;
 import utils.BinaryTreeUtils;
+import utils.CheckArgs;
 import utils.Generator;
 import utils.ListToBinaryTree;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -40,6 +44,8 @@ import java.util.Set;
  */
 
 public class TestForCalculate {
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
 
     /**
      * 测试javaBean包下的实体类Fraction
@@ -143,6 +149,10 @@ public class TestForCalculate {
     public void TestGenerate(){
         Generate generateService = new Generate();
         generateService.generateExp(100,10);
+
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("输入参数不符要求！");
+        generateService.generateExp(0,10);
     }
 
 
@@ -153,5 +163,25 @@ public class TestForCalculate {
     public void TestCheckAnswer(){
         CheckAnswer check = new CheckAnswer();
         check.checkAnswer(new File("exerciseAnswer.txt"), new File("AnswerCopy.txt"));
+
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("File Not Found!!!");
+        check.checkAnswer(new File("exAnswer.txt"), new File("AnswerCopy.txt"));
+    }
+
+    /**
+     * 测试utils/checkArgs
+     */
+    @Test
+    public void TestCheckArgs(){
+        String[] args = {"-n","15","-r","10"};
+        String[] args1 = {"-n","15"};
+        String[] args2 = {"-r","10"};
+        String[] args3 = {};
+
+        assert CheckArgs.checkArgs(args,"-n","-r");
+        assert !CheckArgs.checkArgs(args1,"-n","-r");
+        assert !CheckArgs.checkArgs(args2,"-n","-r");
+        assert !CheckArgs.checkArgs(args3);
     }
 }
