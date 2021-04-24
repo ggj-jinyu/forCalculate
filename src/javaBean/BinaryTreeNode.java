@@ -7,22 +7,10 @@ public class BinaryTreeNode {
     private BinaryTreeNode leftChild;  //左孩子
     private BinaryTreeNode rightChild; //右孩子
 
-    public BinaryTreeNode() {
-    }
+    public BinaryTreeNode() { }
 
     public BinaryTreeNode(Object data) {
         this.data = data;
-    }
-
-    public BinaryTreeNode(Object data, BinaryTreeNode leftChild) {
-        this.data = data;
-        this.leftChild = leftChild;
-    }
-
-    public BinaryTreeNode(Object data, BinaryTreeNode leftChild, BinaryTreeNode rightChild) {
-        this.data = data;
-        this.leftChild = leftChild;
-        this.rightChild = rightChild;
     }
 
     public Object getData() {

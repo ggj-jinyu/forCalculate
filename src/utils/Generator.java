@@ -12,8 +12,7 @@ public class Generator {
 
     private Generator(){ }
 
-/*
-    //无括号生成器
+/*  无括号生成器
     public static List<Object> generator(int range){
         //操作符个数,1~3
         int count = random.nextInt(3) + 1;

@@ -90,7 +90,7 @@ public class BinaryTreeUtils {
     //先序遍历
     public static void preOrder(BinaryTreeNode node){
         if(node!=null){
-            System.out.println(node.getData()); //先访问根节点
+            System.out.println(node+" "); //先访问根节点
             preOrder(node.getLeftChild());  //先根遍历左子树
             preOrder(node.getRightChild());  //先根遍历右子树
         }
@@ -100,7 +100,7 @@ public class BinaryTreeUtils {
     public static void inOrder(BinaryTreeNode node){
         if(node!=null){
             inOrder(node.getLeftChild());  //中根遍历左子树
-            System.out.println(node);    //访问根节点
+            System.out.println(node+" ");    //访问根节点
             inOrder(node.getRightChild());  //中根遍历右子树
         }
     }
@@ -110,7 +110,7 @@ public class BinaryTreeUtils {
         if(node!=null){
             postOrder(node.getLeftChild());  //后根遍历左子树
             postOrder(node.getRightChild());  //后根遍历右子树
-            System.out.println(node);   //访问根节点
+            System.out.print(node+" ");   //访问根节点
         }
     }
 
