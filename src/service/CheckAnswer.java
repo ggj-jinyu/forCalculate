@@ -7,6 +7,11 @@ import java.util.List;
 
 public class CheckAnswer {
     public void checkAnswer(File exerciseAnswer, File answer){
+        if(exerciseAnswer==null || !exerciseAnswer.exists()
+                || answer==null || !answer.exists()){
+            System.out.println("文件未找到!!!");
+            throw new RuntimeException("File Not Found!!!");
+        }
         List<String> answerList = FileStream.inStream(answer);
         List<String> testAnswerList = FileStream.inStream(exerciseAnswer);
         StringBuilder correct = new StringBuilder();

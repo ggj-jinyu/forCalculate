@@ -15,7 +15,10 @@ import java.util.Set;
 
 public class Generate {
     public void generateExp(int nums, int range){
-        if(nums<=0) return;
+        if(nums<1 || range<1) {
+            System.out.println("输入参数不符要求！");
+            throw new RuntimeException("输入参数不符要求！");
+        }
         List<String> expList = new ArrayList<>();
         Set<BinaryTree> expSet = new LinkedHashSet<>(); //利用Set查重，方法可改进
         List<String> answerList = new ArrayList<>();
