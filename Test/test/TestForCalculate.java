@@ -42,73 +42,67 @@ import java.util.Set;
 public class TestForCalculate {
 
     /**
-     * 测试实体类Fraction
+     * 测试javaBean包下的实体类Fraction
      */
     @Test
     public void TestFraction(){
         Fraction fraction1 = new Fraction();
         fraction1.setDenominator(3);
         fraction1.setNumerator(2);
-        assert fraction1.toString().equals("2/3");
+        assert fraction1.toString().equals("2/3"); //断言 fraction1 为 2/3
 
-        Fraction fraction2 = new Fraction(3);
+        Fraction fraction2 = new Fraction(3); //一个参数的构造方法
         assert fraction2.toString().equals("3");
 
-        Fraction fraction3 = new Fraction(2,4);
-        assert fraction3.toString().equals("1/2");
-
-        assert fraction1.max(fraction3);
+        Fraction fraction3 = new Fraction(2,3);
+        assert !fraction3.toString().equals("1/2");
+        //测试equals方法
+        assert fraction1.equals(fraction3);
+        assert !fraction1.equals(fraction2);
+        //测试max方法
+        assert fraction2.max(fraction1);
     }
 
+
     /**
-     * 测试算术表达式生成器
+     * 测试utils/Generator 算术表达式生成器
      */
     @Test
     public void TestGenerator(){
         int i = 0;
-        while (i<10){
-            List<Object> exp = Generator.generator(9);
+        while (i<5){
+            List<Object> exp = Generator.generator(10);
             System.out.println(Generator.ListToString(exp));
             ++i;
         }
     }
 
-    /**
-     * 测试 算术表达式 中序转后序
-     */
-    @Test
-    public void TestListToBinaryTree(){
-        int i = 0;
-        while (i<15){
-            List<Object> exp = Generator.generator(9);
-            System.out.println(Generator.ListToString(exp));
-            List<Object> list = ListToBinaryTree.toPost(exp);
-            System.out.println(Generator.ListToString(list));
-            System.out.println();
-            ++i;
-        }
-    }
 
     /**
-     * 测试二叉树BinaryTree的生成
+     * 测试utils/ListToBinaryTree 表达式中序转逆波兰式、二叉树BinaryTree的生成
      */
     @Test
     public void TestBinaryTree(){
         int i = 0;
-        while (i<15) {
-            List<Object> exp = Generator.generator(9);
+        while (i<5) {
+            //生成表达式
+            List<Object> exp = Generator.generator(10);
             System.out.println(Generator.ListToString(exp));
+            //表达式中序转逆波兰式
             List<Object> list = ListToBinaryTree.toPost(exp);
             System.out.println(Generator.ListToString(list));
+            //二叉树BinaryTree的生成
             BinaryTree binaryTree = ListToBinaryTree.expRPNToBinaryTree(list);
             BinaryTreeUtils.postOrder(binaryTree.getRoot());
-            System.out.println("-----");
+            System.out.println();
+            System.out.println("---------");
             ++i;
         }
     }
 
+
     /**
-     * 测试查重
+     * 测试 题目查重
      */
     @Test
     public void TestIsSameTree(){
@@ -141,8 +135,9 @@ public class TestForCalculate {
         assert binaryTreeSet.size() == 16;
     }
 
+
     /**
-     * 测试service里的Generate功能
+     * 测试service包 Generate功能
      */
     @Test
     public void TestGenerate(){
@@ -150,8 +145,9 @@ public class TestForCalculate {
         generateService.generateExp(100,10);
     }
 
+
     /**
-     * 测试检测答案checkAnswer功能
+     * 测试service包 检测答案checkAnswer功能
      */
     @Test
     public void TestCheckAnswer(){
