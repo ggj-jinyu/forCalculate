@@ -35,3 +35,20 @@
      * Correct: 5 (1, 3, 5, 7, 9)
      * Wrong: 5 (2, 4, 6, 8, 10)
    * 其中" : "后面的数字5表示对/错的题目的数量，括号内的是对/错题目的编号。为简单起见，假设输入的题目都是按照顺序编号的符合规范的题目（序号由1开始）。
+
+### 使用：
+
+* 前言：开发基本完成，测试基本完成，可能存在bug，以后有空再来优化优化
+* 使用方法：
+  * 在out/artifacts/forCalculate_jar目录下载jar包
+  * 保证电脑有JVM的环境
+  * win+R 输入cmd 打开cmd界面 cd到jar包同目录
+  * 运行下列命令
+    * 生成题目
+      * java -jar forCalculate.jar -n [产生题目个数] -r [数值范围]
+    * 检测答案
+      * java -jar forCalculate.jar -e [用户答案文件] -a [正确答案文件]
+    * 查看命令
+      * java -jar forCalculate.jar -help
+
+​	
