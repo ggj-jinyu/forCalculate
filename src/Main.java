@@ -11,12 +11,14 @@ public class Main {
     public static void main(String[] args) {
         if (CheckArgs.checkArgs(args, "-n", "-r")) {
             generate(args);
+            System.out.println("题目已经生成，可在jar包同目录下的Exercises.txt和Answer.txt查看");
         } else if (CheckArgs.checkArgs(args, "-e", "-a")) {
             check(args);
+            System.out.println("答案检查完毕，可在jar包同目录下的Grade.txt查看结果");
         } else if (CheckArgs.checkArgs(args, "-help")){
             System.out.println("HELP:");
-            System.out.println("生成表达式和答案：-n [题目个数] -r [数值范围(>=0)]");
-            System.out.println("检测答案：-e [用户答案文件名] -a [正确答案文件名]");
+            System.out.println("生成表达式和答案：java -jar forCalculate -n [题目个数] -r [数值范围(>=0)]");
+            System.out.println("检测答案：java -jar forCalculate -e [用户答案文件名] -a [正确答案文件名]");
         } else {
             System.out.println("参数不合法");
         }
