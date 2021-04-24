@@ -156,6 +156,6 @@ public class TestForCalculate {
     @Test
     public void TestCheckAnswer(){
         CheckAnswer check = new CheckAnswer();
-        check.checkAnswer(new File("exerciseAnswer.txt"), new File("Answer.txt"));
+        check.checkAnswer(new File("exerciseAnswer.txt"), new File("AnswerCopy.txt"));
     }
 }
