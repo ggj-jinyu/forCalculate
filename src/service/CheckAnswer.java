@@ -6,37 +6,31 @@ import java.io.*;
 import java.util.List;
 
 public class CheckAnswer {
-    public void checkAnswer(){
-        List<String> answerList = FileStream.inStream(new File("Answer.txt"));
-        List<String> testAnswerList = FileStream.inStream(new File("exerciseAnswer.txt"));
+    public void checkAnswer(File exerciseAnswer, File answer){
+        List<String> answerList = FileStream.inStream(answer);
+        List<String> testAnswerList = FileStream.inStream(exerciseAnswer);
         StringBuilder correct = new StringBuilder();
         StringBuilder wrong = new StringBuilder();
-        int correctNum = 0;
-        int wrongNum = 0;
-        correct.append("(");
-        wrong.append("(");
+        int correctNum = 0; //题目一致的数目
+        int wrongNum = 0;   //不一致的数目
         for(int i = 0; i<answerList.size(); ++i){
             int index = answerList.get(i).lastIndexOf(" ");
-            String answer = answerList.get(i).substring(index);
-            String testAnswer = testAnswerList.get(i).substring(index);
-            if(i==0){
-                if(answer.equals(testAnswer)){
-                    correct.append(i+1);
-                    ++correctNum;
-                }else {
-                    wrong.append(i+1);
-                    ++wrongNum;
-                }
-            }
-            if(answer.equals(testAnswer)){
-                correct.append(",").append(i+1);
+            String answerStr = answerList.get(i).substring(index);
+            String testAnswerStr = testAnswerList.get(i).substring(index);
+            //判断答案是否一致
+            if(answerStr.equals(testAnswerStr)){
+                correct.append(i+1).append(",");
+                ++correctNum;
             }else {
-                wrong.append(",").append(i+1);
+                wrong.append(i+1).append(",");
+                ++wrongNum;
             }
         }
-        String correctStr = "Correct: " + correctNum + correct;
-        String wrongStr = "Wrong: " + wrongNum + wrong;
-
+        correct.deleteCharAt(correct.lastIndexOf(","));//删除最后一个逗号
+        wrong.deleteCharAt(wrong.lastIndexOf(","));
+        String correctStr = "Correct: " + correctNum + "(" + correct + ")";
+        String wrongStr = "Wrong: " + wrongNum + "(" + wrong + ")";
+        //输出数据到文件
         try(BufferedWriter bw = new BufferedWriter(new FileWriter("Grade.txt"))) {
             bw.write(wrongStr); bw.newLine();
             bw.write(correctStr); bw.flush();
