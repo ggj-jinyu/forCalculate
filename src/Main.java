@@ -9,6 +9,7 @@ public class Main {
     private static final CheckAnswer checkAnswer = new CheckAnswer();
 
     public static void main(String[] args) {
+        long start = System.currentTimeMillis();
         if (CheckArgs.checkArgs(args, "-n", "-r")) {
             generate(args);
             System.out.println("题目已经生成，可在jar包同目录下的Exercises.txt和Answer.txt查看");
@@ -22,6 +23,8 @@ public class Main {
         } else {
             System.out.println("参数不合法");
         }
+        long end = System.currentTimeMillis();
+        System.out.println("总花费：" + (end - start) + "毫秒");
     }
 
     private static void check(String[] args) {
