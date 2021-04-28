@@ -37,7 +37,7 @@ public class Main {
                 }
                 if("-a".equals(args[i])) answer=args[i+1];
             }
-            checkAnswer.checkAnswer(new File(exercisesAnswer),new File(answer));
+            checkAnswer.checkAnswer(exercisesAnswer,answer);
         }catch (Exception e){
             System.out.println("参数输入格式有误或文件不存在！");
             System.out.println(e.getMessage());

@@ -7,9 +7,12 @@ import java.util.List;
 public class FileStream {
     private FileStream() { }
 
-    public static void outStream(List<String> strList, File file){
+    public static void outStream(List<String> strList, String fileStr){
+        if(strList == null || strList.isEmpty()) {
+            throw new RuntimeException("FileStream/outStream的参数StrList为空");
+        }
         //jdk7的异常处理方式，若有异常自动关闭BufferedWriter
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileStr))) {
             //遍历expression集合
             for (String str : strList) {
                 bw.write(str);
@@ -21,9 +24,9 @@ public class FileStream {
         }
     }
 
-    public static List<String> inStream(File file){
+    public static List<String> inStream(String fileStr){
         List<String> list = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try(BufferedReader br = new BufferedReader(new FileReader(fileStr))) {
             String line;
             while ((line=br.readLine())!=null){
                 list.add(line);

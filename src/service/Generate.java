@@ -43,12 +43,11 @@ public class Generate {
                 ++expSize;
                 //把数据加入集合
                 expList.add(expSize+". "+Generator.ListToString(exp));
-                answerList.add(expSize+". "+Generator.ListToString(exp)+" "+result.toString());
+                answerList.add(expSize+". "+Generator.ListToString(exp)+" "+ result);
             }
         }
-
         //输出数据到文件
-        FileStream.outStream(expList, new File("Exercises.txt"));
-        FileStream.outStream(answerList,new File("Answer.txt"));
+        FileStream.outStream(expList, "Exercises.txt");
+        FileStream.outStream(answerList,"Answer.txt");
     }
 }

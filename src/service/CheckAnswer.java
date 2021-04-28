@@ -6,11 +6,11 @@ import java.io.*;
 import java.util.List;
 
 public class CheckAnswer {
-    public void checkAnswer(File exerciseAnswer, File answer){
-        if(exerciseAnswer==null || !exerciseAnswer.exists()
-                || answer==null || !answer.exists()){
-            System.out.println("文件未找到!!!");
-            throw new RuntimeException("File Not Found!!!");
+    public void checkAnswer(String exerciseAnswer, String answer){
+        if(exerciseAnswer==null || answer==null
+                || exerciseAnswer.isEmpty() || answer.isEmpty()){
+            System.out.println("文件名为空!!!");
+            throw new RuntimeException("File Is Empty!!!");
         }
         List<String> answerList = FileStream.inStream(answer);
         List<String> testAnswerList = FileStream.inStream(exerciseAnswer);
@@ -40,7 +40,7 @@ public class CheckAnswer {
             bw.write(wrongStr); bw.newLine();
             bw.write(correctStr); bw.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

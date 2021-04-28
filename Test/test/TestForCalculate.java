@@ -7,41 +7,13 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import service.CheckAnswer;
 import service.Generate;
-import utils.BinaryTreeUtils;
-import utils.CheckArgs;
-import utils.Generator;
-import utils.ListToBinaryTree;
+import utils.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-/**
- * 1.assertTrue/False ([String message,]boolean condition);
- * 判断一个条件是true还是false。感觉这个最好用了，不用记下来那么多的方法名。
- *
- * 2.fail ([String message,]);
- * 失败，可以有消息，也可以没有消息。
- *
- * 3.assertEquals( [String message,]Object expected,Object actual);
- * 判断是否相等，可以指定输出错误信息。
- * 第一个参数是期望值，第二个参数是实际的值。
- * 这个方法对各个变量有多种实现。在JDK1.5中基本一样。
- * 但是需要主意的是float和double最后面多一个delta的值，可能是误差范围，不确定这个 单词什么意思，汗一个。
- *
- * 4.assertNotNull/Null( [String message,]Object obj);
- * 判读一个对象是否非空(非空)。
- *
- * 5.assertSame/NotSame ([String message,]Object expected,Object actual);
- * 判断两个对象是否指向同一个对象。看 内存地址 。
- *
- * 7.failNotSame/failNotEquals (String message, Object expected, Object actual)
- * 当不指向同一个内存地址或者不相等的时候，输出错误信息。
- * 注意信息是必须的，而且这个输出是格式化过的。
- */
 
 public class TestForCalculate {
     @Rule
@@ -80,6 +52,7 @@ public class TestForCalculate {
             List<Object> exp = Generator.generator(10);
             System.out.println(Generator.ListToString(exp));
             ++i;
+            assert exp.size()>=1 && exp.size()<=9;
         }
     }
 
@@ -108,7 +81,7 @@ public class TestForCalculate {
 
 
     /**
-     * 测试 题目查重
+     * 测试 题目查重的原理 是否正确
      */
     @Test
     public void TestIsSameTree(){
@@ -141,33 +114,24 @@ public class TestForCalculate {
         assert binaryTreeSet.size() == 16;
     }
 
-
     /**
-     * 测试service包 Generate功能
+     * 测试utils/FileStream的异常
      */
     @Test
-    public void TestGenerate(){
-        Generate generateService = new Generate();
-        generateService.generateExp(100,10);
+    public void TestFileStream(){
+        List<String> stringList = new ArrayList<>();
 
         exception.expect(RuntimeException.class);
-        exception.expectMessage("输入参数不符要求！");
-        generateService.generateExp(0,10);
+        exception.expectMessage("FileStream/outStream的参数StrList为空");
+        FileStream.outStream(stringList, "test.txt");
+
+        stringList.add("测试1");
+        exception.expect(IOException.class);
+        FileStream.outStream(stringList," ");
+        exception.expect(IOException.class);
+        FileStream.inStream(" ");
     }
 
-
-    /**
-     * 测试service包 检测答案checkAnswer功能
-     */
-    @Test
-    public void TestCheckAnswer(){
-        CheckAnswer check = new CheckAnswer();
-        check.checkAnswer(new File("exerciseAnswer.txt"), new File("AnswerCopy.txt"));
-
-        exception.expect(RuntimeException.class);
-        exception.expectMessage("File Not Found!!!");
-        check.checkAnswer(new File("exAnswer.txt"), new File("AnswerCopy.txt"));
-    }
 
     /**
      * 测试utils/checkArgs
@@ -184,4 +148,42 @@ public class TestForCalculate {
         assert !CheckArgs.checkArgs(args2,"-n","-r");
         assert !CheckArgs.checkArgs(args3);
     }
+
+
+    /**
+     * 测试service包 Generate功能
+     */
+    @Test
+    public void TestGenerate(){
+        Generate generateService = new Generate();
+        long start = System.currentTimeMillis();
+        generateService.generateExp(10000,10);
+        long end = System.currentTimeMillis();
+        assert (end-start) < 1000;  //断言生成10000个题目所用时间小于1秒
+
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("输入参数不符要求！");
+        generateService.generateExp(0,10);
+    }
+
+
+    /**
+     * 测试service包 检测答案checkAnswer功能
+     */
+    @Test
+    public void TestCheckAnswer(){
+        CheckAnswer check = new CheckAnswer();
+        check.checkAnswer("exerciseAnswer.txt", "AnswerCopy.txt");
+
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("File Is Empty!!!");
+        check.checkAnswer("", "AnswerCopy.txt");
+
+        exception.expect(IOException.class);
+        check.checkAnswer(" ", "AnswerCopy.txt");
+
+        exception.expect(IOException.class);
+        check.checkAnswer("exAnswer.txt", "AnswerCopy.txt");
+    }
+
 }
